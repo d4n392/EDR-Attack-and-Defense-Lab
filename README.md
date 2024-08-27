@@ -6,9 +6,9 @@ Eric Capuano's Guide: https://blog.ecapuano.com/p/so-you-want-to-be-a-soc-analys
 
 ### Setup:
 
-Configured and set up Ubuntu Server and Windows 11 virtual machines for attack and defense roles.
-Installed and configured Sliver C2 framework on the Ubuntu machine.
-Deployed and set up LimaCharlie EDR on the Windows machine, including integrating Sysmon for enhanced logging.
+First I spun up both machines. The attack machine will run on Ubuntu Server, and the endpoint will be running Windows 11. In order for this lab to work smoothly I turned off all the Windows Security solutions (Virus & threat protection, Microsoft Defender Firewall, etc.) on the Windows 11 VM, making it my vulnerable victim machine. I am also going to be installing Sliver on the Ubuntu machine as my primary attack tool, and setting up LimaCharlie on the Windows machine as an EDR solution. LimaCharlie will have a sensor linked to the Windows machine, and will be importing sysmon logs.
+
+
 Payload Creation and Deployment:
 
 Generated and deployed a command-and-control (C2) payload using Sliver.
@@ -41,46 +41,27 @@ Familiarized with normal vs. anomalous activity to enhance threat detection capa
 This lab provided hands-on experience in attack simulation, endpoint monitoring, and rule-based defense strategies, enhancing skills in both offensive and defensive cybersecurity practices.
 
 ### Skills Learned
-[Bullet Points - Remove this afterwards]
 
-- Advanced understanding of SIEM concepts and practical application.
-- Proficiency in analyzing and interpreting network logs.
+- Advanced understanding of EDR concepts and practical application.
+- Proficiency in analyzing and interpreting network telemetry.
 - Ability to generate and recognize attack signatures and patterns.
-- Enhanced knowledge of network protocols and security vulnerabilities.
+- Enhanced knowledge of 
 - Development of critical thinking and problem-solving skills in cybersecurity.
 
 ### Tools Used
 [Bullet Points - Remove this afterwards]
 - LimaCharlie EDR for endpoint detection and response capabilities,
 monitoring and capturing telemetry, creating and applying detection rules.
-- Security Information and Event Management (SIEM) system for log ingestion and analysis.
+- Sysmon integrated with LimaCharlie for detailed logging and event capture on the Windows endpoint.
 - Network analysis tools (such as Wireshark) for capturing and examining network traffic.
-- Telemetry generation tools to create realistic network traffic and attack scenarios.
+- VirusTotal used for scanning and analyzing the hash of executables to identify known malware.
 
 ## Tools:
 
-Sliver C2 Framework:
-Used for generating and managing command-and-control (C2) payloads.
-Facilitates establishing and controlling sessions on compromised systems.
-LimaCharlie EDR:
-Provides endpoint detection and response capabilities.
-Monitors and captures telemetry such as process activity, network connections, and file system changes.
-Allows for the creation and application of detection rules.
-Ubuntu Server:
-Hosts the Sliver C2 server.
-Used for launching attacks and managing the C2 framework.
-Windows 11:
-Acts as the target system for deploying and executing C2 payloads.
-Monitored using LimaCharlie for detecting and analyzing the impact of attacks.
-Sysmon:
-Integrated with LimaCharlie for detailed logging and event capture on the Windows endpoint.
-VirusTotal:
-Used for scanning and analyzing the hash of executables to identify known malware.
-These tools collectively provide a comprehensive environment for simulating cyber attacks, monitoring endpoints, and developing detection and response strategies.
 
-Skills Learned in the EDR Home Lab: Attack and Defense
 
-Virtual Machine Setup:
+
+## Skills:
 
 Configured and set up Ubuntu Server and Windows 11 virtual machines for attack and defense roles.
 Installed and configured Sliver C2 framework on the Ubuntu machine.
@@ -115,45 +96,6 @@ Analyzed security event logs and telemetry data to understand attack impacts and
 Familiarized with normal vs. anomalous activity to enhance threat detection capabilities.
 This lab provided hands-on experience in attack simulation, endpoint monitoring, and rule-based defense strategies, enhancing skills in both offensive and defensive cybersecurity practices.
 
-
-
-
-
-
-You said:
-What about a bulleted list of the tools learned
-ChatGPT said:
-ChatGPT
-Tools Learned in the EDR Home Lab: Attack and Defense
-
-Sliver C2 Framework:
-
-Used for generating and managing command-and-control (C2) payloads.
-Facilitates establishing and controlling sessions on compromised systems.
-LimaCharlie EDR:
-
-Provides endpoint detection and response capabilities.
-Monitors and captures telemetry such as process activity, network connections, and file system changes.
-Allows for the creation and application of detection rules.
-Ubuntu Server:
-
-Hosts the Sliver C2 server.
-Used for launching attacks and managing the C2 framework.
-Windows 11:
-
-Acts as the target system for deploying and executing C2 payloads.
-Monitored using LimaCharlie for detecting and analyzing the impact of attacks.
-Sysmon:
-
-Integrated with LimaCharlie for detailed logging and event capture on the Windows endpoint.
-VirusTotal:
-
-Used for scanning and analyzing the hash of executables to identify known malware.
-These tools collectively provide a comprehensive environment for simulating cyber attacks, monitoring endpoints, and developing detection and response strategies.
-
-
-
-
 ## Steps
 drag & drop screenshots here or use imgur and reference them using imgsrc
 
@@ -161,8 +103,10 @@ Every screenshot should have some text explaining what the screenshot is about.
 
 Example below.
 
-*Ref 1: Network Diagram*
+*Ref 1: Windows Security controls off*
 
+![image](https://github.com/user-attachments/assets/415b034b-db82-4da7-bdf9-88b55b2f52c3)
+![image](https://github.com/user-attachments/assets/9d6597e1-a266-4ab8-8852-72c1754aeede)
 
 
 
