@@ -107,7 +107,7 @@ We can also use LimaCharlie to scan the hash of the payload through VirusTotal; 
 
 ![Virus NOT Detected](https://github.com/user-attachments/assets/8bea1003-0e8a-4de4-ac38-7e980d2d1379)
 
-Now on the attack machine we can simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect the sensitive process.
+### Now to simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect this common cyber attack.
 
 Part 4 - Blocking an attack
 
