@@ -94,11 +94,18 @@ _In this case my victim machine is using Sysmon64 and Windows Smart Screen_.
 
 Using my host machine I click the sensors tab, to see that my Windows machine is online.
 
+![LimaCharlie Win11 vm Sensor](https://github.com/user-attachments/assets/683eea85-3abc-4784-878d-6666f4e0c2f7)
+
 We can look inside our LimaCharlie SIEM and see telemetry from the attack. We can identify the payload thats running and see the IP its connected to.
 
+![Unusual NOT signed process hmm](https://github.com/user-attachments/assets/ee04912e-9120-4411-a4f0-007de47cc5f9)
+![Network Logs of our attack](https://github.com/user-attachments/assets/3ecf5dd1-1a41-4f31-8aec-ebd87f6debe6)
+![Timeline of Execution](https://github.com/user-attachments/assets/dcc8720a-b590-4373-aa7c-9c017b1fa2ca)
 
 
-We can also use LimaCharlie to scan the hash of the payload through VirusTotal; however, it will be clean since we just created the payload ourselves.
+We can also use LimaCharlie to scan the hash of the payload through VirusTotal; however, it will yield no results since we just created the brand new payload ourselves!
+
+![Virus NOT Detected](https://github.com/user-attachments/assets/8bea1003-0e8a-4de4-ac38-7e980d2d1379)
 
 Now on the attack machine we can simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect the sensitive process.
 
