@@ -109,21 +109,26 @@ We can also use LimaCharlie to scan the hash of the payload through VirusTotal; 
 
 ### Now to simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect this common cyber attack.
 
-Part 4 - Blocking an attack
+Using the _'procdump -n lsass.exe -s lsass.dmp'_ command I saved the remote processes from memory locally on Sliver C2 server. 
 
-Now instead of simply detection, we can practice using LimaCharlie to write a rule that will detect and block the attacks coming from the Sliver server. On the Ubuntu machine we can simulate parts of a ransomware attack, by attempting to delete the volume shadow copies. In LimaCharlie we can view the telemetry and then write a rule that will block the attack entirely. After we create the rule in our SIEM, the Ubuntu machine will have no luck trying the same attack again.
+![image](https://github.com/user-attachments/assets/ae281d5b-8f7c-413a-bc5a-aa908d86a980)
 
-Part 5 - Tuning false positives
+#### _Let's see what this looks like on LimaCharlie_
 
-Part 6 - Trigger YARA scans with a detection rule
+![Sensitive_Process_Event](https://github.com/user-attachments/assets/d5b08096-0c1f-40cb-af0b-c76b5e93873e)
 
-
-
-
+![Detection Rule](https://github.com/user-attachments/assets/a3b65c2f-7d13-4e61-9f98-928f9c13ecdc)
 
 
+#### Instead of just detecting attacks, we can use LimaCharlie to create a rule that both detects and responds, by blocking threats originating from the Sliver server. By simulating ransomware on the Ubuntu machine, such as attempting to delete volume shadow copies, we can monitor the telemetry in LimaCharlie and then implement a rule that completely stops the attack. Once this rule is active in our SIEM, any further attempts by the Ubuntu machine to carry out the same attack will be blocked.
 
+![Deleting shadow volume copies (Ransomware attack)](https://github.com/user-attachments/assets/020b0796-18e6-483c-bceb-363944122ad7)
 
+![Detection of Deleting shadow volumes](https://github.com/user-attachments/assets/a7d3f7fe-a332-409f-b6ae-0e3f90f1d121)
+
+![Response Rule Vss_deletion_kill_it](https://github.com/user-attachments/assets/78032692-1303-4ec4-be96-7e5ab2fe805f)
+
+![Forced shell exit](https://github.com/user-attachments/assets/8001d5a3-a31e-400a-8e6f-90584c8ae4f8)
 
 
 
