@@ -120,7 +120,7 @@ Using the _'procdump -n lsass.exe -s lsass.dmp'_ command, I save the remote proc
 
 ![image](https://github.com/user-attachments/assets/ae281d5b-8f7c-413a-bc5a-aa908d86a980)
 
-#### _Let's see what this looks like on LimaCharlie_
+#### _Let's see what this looks like in LimaCharlie_
 
 *Ref 8: Detection Rule*
 
