@@ -143,5 +143,7 @@ Using the _'procdump -n lsass.exe -s lsass.dmp'_ command, I save the remote proc
 
 ![Forced shell exit](https://github.com/user-attachments/assets/8001d5a3-a31e-400a-8e6f-90584c8ae4f8)
 
+### Summary
 
+#### And there you have it! I’ve walked through the complete lifecycle of emulating, detecting, and blocking cyberattacks within a SOC Home Lab. From configuring a vulnerable Windows 11 VM and disabling security features to deploying and analyzing a malicious payload using the Sliver C2 framework, I got my hands dirty with the technical details. I didn’t just observe the attacks—I actively engaged in the process of crafting detection and response rules within LimaCharlie to monitor the telemetry and ultimately block the simulated threats.
 
