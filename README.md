@@ -116,7 +116,7 @@ We can also use LimaCharlie to scan the hash of the payload through VirusTotal; 
 
 ### Now to simulate an attack to steal credentials by dumping the LSASS memory. In LimaCharlie we can check the sensors, observe the telemetry, and write rules to detect this common cyber attack.
 
-Using the _'procdump -n lsass.exe -s lsass.dmp'_ command I saved the remote processes from memory locally on Sliver C2 server. 
+Using the _'procdump -n lsass.exe -s lsass.dmp'_ command, I save the remote processes from memory locally on Sliver C2 server. 
 
 ![image](https://github.com/user-attachments/assets/ae281d5b-8f7c-413a-bc5a-aa908d86a980)
 
