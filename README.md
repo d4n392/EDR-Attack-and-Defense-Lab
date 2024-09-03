@@ -27,6 +27,7 @@ monitoring and capturing telemetry, creating and applying detection rules.
 - Sysmon integrated with LimaCharlie for detailed network logging and event capture on the Windows endpoint.
 - VirusTotal used for scanning and analyzing the hash of executables to identify known malware.
 - Sliver C2 Server for crafting and deploying a malicious payload.
+- Utilizing Windows and Linux CLI
 
 ## Steps
 
