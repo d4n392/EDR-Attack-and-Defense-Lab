@@ -1,4 +1,4 @@
-# EDR-Attack-and-Defense-Lab
+# Purpose
 
 In this foundational SOC Home Lab I spun up a Win11 vm as my victim client and disabled Windows Defender EDR. Set up a C2 framework using Sliver for emulating threat-actor behavior by crafting my very own malicious payload. Threw attacks, caught the detections and watched the malicious traffic. Set up automated D&R rules to mitigate these attacks.
 
